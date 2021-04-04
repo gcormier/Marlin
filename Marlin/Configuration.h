@@ -1,10 +1,15 @@
 #define ST7920_DELAY_3 DELAY_NS(250)
 #define ST7920_DELAY_2 DELAY_NS(250)
 
-#define SPINDLE_LASER_ENA_PIN    P0_02   // TFT or AUX1 header
-#define SPINDLE_LASER_PWM_PIN    P2_00   // digital pin - MUST BE HARDWARE PWM
+// 0.2 TX
+// 0.3 RX
+// 2.0 SERVO
+// 0.23 TB
+// 0.24 TH0
+#define SPINDLE_LASER_ENA_PIN    P0_23
+#define SPINDLE_DIR_PIN          P0_24
+#define SPINDLE_LASER_PWM_PIN    P2_05   // digital pin - MUST BE HARDWARE PWM
 // P2_00 is servo header
-#define SPINDLE_DIR_PIN          P0_03   // TFT or AUX1 header
 
 /**
  * Marlin 3D Printer Firmware
@@ -795,7 +800,7 @@
 //#define USE_ZMAX_PLUG
 
 // Enable pullup for all endstops to prevent a floating state
-#define ENDSTOPPULLUPS
+//#define ENDSTOPPULLUPS
 #if DISABLED(ENDSTOPPULLUPS)
 // Disable ENDSTOPPULLUPS to set pullups individually
 //#define ENDSTOPPULLUP_XMAX
@@ -822,20 +827,13 @@
 
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here
 // (most common setup).
-#define X_MIN_ENDSTOP_INVERTING \
-    false // Set to true to invert the logic of the endstop.
-#define Y_MIN_ENDSTOP_INVERTING \
-    false // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING \
-    true // Set to true to invert the logic of the endstop.
-#define X_MAX_ENDSTOP_INVERTING \
-    false // Set to true to invert the logic of the endstop.
-#define Y_MAX_ENDSTOP_INVERTING \
-    false // Set to true to invert the logic of the endstop.
-#define Z_MAX_ENDSTOP_INVERTING \
-    false // Set to true to invert the logic of the endstop.
-#define Z_MIN_PROBE_ENDSTOP_INVERTING \
-    true // Set to true to invert the logic of the probe.
+#define X_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define Y_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define Z_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
+#define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define Z_MIN_PROBE_ENDSTOP_INVERTING true // Set to true to invert the logic of the probe.
 
 /**
  * Stepper Drivers
@@ -1204,10 +1202,7 @@
   *     |    [-]    |
   *     O-- FRONT --+
   */
-#define NOZZLE_TO_PROBE_OFFSET \
-    {                          \
-        10, 10, 0              \
-    }
+#define NOZZLE_TO_PROBE_OFFSET { 10, 10, 14.20 }
 
   // Most probes should stay away from the edges of the bed, but
   // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1286,8 +1281,8 @@
     -2 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
-#define Z_PROBE_OFFSET_RANGE_MIN -20
-#define Z_PROBE_OFFSET_RANGE_MAX 20
+#define Z_PROBE_OFFSET_RANGE_MIN -16
+#define Z_PROBE_OFFSET_RANGE_MAX 16
 
 // Enable the M48 repeatability test to test probe accuracy
 //#define Z_MIN_PROBE_REPEATABILITY_TEST
@@ -1779,10 +1774,7 @@
 #endif
 
 // Homing speeds (mm/min)
-#define HOMING_FEEDRATE_MM_M           \
-    {                                  \
-        (50 * 60), (50 * 60), (4 * 60) \
-    }
+#define HOMING_FEEDRATE_MM_M { 2000, 2000, 1000 }
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS

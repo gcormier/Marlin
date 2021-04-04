@@ -722,14 +722,8 @@
 
 //#define SENSORLESS_BACKOFF_MM  { 2, 2 }     // (mm) Backoff from endstops before sensorless homing
 
-#define HOMING_BUMP_MM \
-   {                   \
-      5, 5, 2          \
-   } // (mm) Backoff from endstops after first bump
-#define HOMING_BUMP_DIVISOR \
-   {                        \
-      2, 2, 4               \
-   } // Re-Bump Speed Divisor (Divides the Homing Feedrate)
+#define HOMING_BUMP_MM { 0, 0, 0 } // (mm) Backoff from endstops after first bump
+#define HOMING_BUMP_DIVISOR { 2, 2, 4 } // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 
 //#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }  // (mm) Backoff from endstops after homing
 
@@ -2125,7 +2119,7 @@
  * Currently handles M108, M112, M410, M876
  * NOTE: Not yet implemented for all platforms.
  */
-//#define EMERGENCY_PARSER
+#define EMERGENCY_PARSER
 
 // Bad Serial-connections can miss a received command by sending an 'ok'
 // Therefore some clients abort after 30 seconds in a timeout.
@@ -2454,7 +2448,7 @@
 
 #if AXIS_IS_TMC(X)
 #define X_CURRENT 800            // (mA) RMS current. Multiply by 1.414 for peak current.
-#define X_CURRENT_HOME X_CURRENT // (mA) RMS current for sensorless homing
+#define X_CURRENT_HOME 200 // (mA) RMS current for sensorless homing
 #define X_MICROSTEPS 16          // 0..256
 #define X_RSENSE 0.11
 #define X_CHAIN_POS -1 // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
@@ -2463,7 +2457,7 @@
 
 #if AXIS_IS_TMC(X2)
 #define X2_CURRENT 800
-#define X2_CURRENT_HOME X2_CURRENT
+#define X2_CURRENT_HOME X_CURRENT_HOME
 #define X2_MICROSTEPS X_MICROSTEPS
 #define X2_RSENSE 0.11
 #define X2_CHAIN_POS -1
@@ -2472,7 +2466,7 @@
 
 #if AXIS_IS_TMC(Y)
 #define Y_CURRENT 800
-#define Y_CURRENT_HOME Y_CURRENT
+#define Y_CURRENT_HOME 200
 #define Y_MICROSTEPS 16
 #define Y_RSENSE 0.11
 #define Y_CHAIN_POS -1
@@ -2481,7 +2475,7 @@
 
 #if AXIS_IS_TMC(Y2)
 #define Y2_CURRENT 800
-#define Y2_CURRENT_HOME Y2_CURRENT
+#define Y2_CURRENT_HOME Y_CURRENT_HOME
 #define Y2_MICROSTEPS Y_MICROSTEPS
 #define Y2_RSENSE 0.11
 #define Y2_CHAIN_POS -1
@@ -2767,20 +2761,20 @@
    *
    * Comment *_STALL_SENSITIVITY to disable sensorless homing for that axis.
    */
-//#define SENSORLESS_HOMING // StallGuard capable drivers only
+#define SENSORLESS_HOMING // StallGuard capable drivers only
 
 #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
 // TMC2209: 0...255. TMC2130: -64...63
-#define X_STALL_SENSITIVITY 8
+#define X_STALL_SENSITIVITY 16
 #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-#define Y_STALL_SENSITIVITY 8
+#define Y_STALL_SENSITIVITY 16
 #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
 //#define Z_STALL_SENSITIVITY  8
 //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY
 //#define Z3_STALL_SENSITIVITY Z_STALL_SENSITIVITY
 //#define Z4_STALL_SENSITIVITY Z_STALL_SENSITIVITY
 //#define SPI_ENDSTOPS              // TMC2130 only
-//#define IMPROVE_HOMING_RELIABILITY
+#define IMPROVE_HOMING_RELIABILITY
 #endif
 
 /**
