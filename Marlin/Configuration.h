@@ -1213,7 +1213,7 @@
 
 // Feedrate (mm/min) for the first approach when double-probing
 // (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST HOMING_FEEDRATE_Z
+#define Z_PROBE_FEEDRATE_FAST (10 * 60)
 
 // Feedrate (mm/min) for the "accurate" probe of each point
 #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2)
@@ -1391,7 +1391,7 @@
 
 // The size of the print bed
 #define X_BED_SIZE 635
-#define Y_BED_SIZE 330
+#define Y_BED_SIZE 325
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0

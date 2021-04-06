@@ -2448,7 +2448,7 @@
 
 #if AXIS_IS_TMC(X)
 #define X_CURRENT 800            // (mA) RMS current. Multiply by 1.414 for peak current.
-#define X_CURRENT_HOME 200 // (mA) RMS current for sensorless homing
+#define X_CURRENT_HOME 300 // (mA) RMS current for sensorless homing
 #define X_MICROSTEPS 16          // 0..256
 #define X_RSENSE 0.11
 #define X_CHAIN_POS -1 // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
@@ -2765,7 +2765,7 @@
 
 #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
 // TMC2209: 0...255. TMC2130: -64...63
-#define X_STALL_SENSITIVITY 16
+#define X_STALL_SENSITIVITY 8
 #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
 #define Y_STALL_SENSITIVITY 16
 #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
@@ -3133,7 +3133,7 @@
    *  - RPM     (S0 - S50000)  Best for use with a spindle
    *  - SERVO   (S0 - S180)
    */
-#define CUTTER_POWER_UNIT PWM255
+#define CUTTER_POWER_UNIT RPM
 
 /**
    * Relative Cutter Power
@@ -3163,9 +3163,9 @@
      * PWMDC = (spdpwr - SPEED_POWER_MIN) / (SPEED_POWER_MAX - SPEED_POWER_MIN) / SPEED_POWER_SLOPE
      */
 #define SPEED_POWER_INTERCEPT 0   // (%) 0-100 i.e., Minimum power percentage
-#define SPEED_POWER_MIN 5000      // (RPM)
-#define SPEED_POWER_MAX 30000     // (RPM) SuperPID router controller 0 - 30,000 RPM
-#define SPEED_POWER_STARTUP 25000 // (RPM) M3/M4 speed/power default (with no arguments)
+#define SPEED_POWER_MIN 3000      // (RPM)
+#define SPEED_POWER_MAX 12000     // (RPM) SuperPID router controller 0 - 30,000 RPM
+#define SPEED_POWER_STARTUP 12000 // (RPM) M3/M4 speed/power default (with no arguments)
 
 #else
 
