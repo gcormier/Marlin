@@ -1388,7 +1388,7 @@
 //#define UTF_FILENAME_SUPPORT
 
 // This allows hosts to request long names for files and folders with M33
-//#define LONG_FILENAME_HOST_SUPPORT
+#define LONG_FILENAME_HOST_SUPPORT
 
 // Enable this option to scroll long filenames in the SD card menu
 //#define SCROLL_LONG_FILENAMES
@@ -1413,7 +1413,7 @@
 /**
    * Auto-report SdCard status with M27 S<seconds>
    */
-//#define AUTO_REPORT_SD_STATUS
+#define AUTO_REPORT_SD_STATUS
 
 /**
    * Support for USB thumb drives using an Arduino USB Host Shield or
@@ -1962,9 +1962,9 @@
 //
 #define ARC_SUPPORT // Disable this feature to save ~3226 bytes
 #if ENABLED(ARC_SUPPORT)
-#define MM_PER_ARC_SEGMENT 1 // (mm) Length (or minimum length) of each arc segment
-//#define ARC_SEGMENTS_PER_R    1 // Max segment length, MM_PER = Min
-#define MIN_ARC_SEGMENTS 24 // Minimum number of segments in a complete circle
+#define MM_PER_ARC_SEGMENT .2 // (mm) Length (or minimum length) of each arc segment
+#define ARC_SEGMENTS_PER_R    1 // Max segment length, MM_PER = Min
+//#define MIN_ARC_SEGMENTS 24 // Minimum number of segments in a complete circle
 //#define ARC_SEGMENTS_PER_SEC 50 // Use feedrate to choose segment length (with MM_PER_ARC_SEGMENT as the minimum)
 #define N_ARC_CORRECTION 25 // Number of interpolated segments between corrections
 //#define ARC_P_CIRCLES           // Enable the 'P' parameter to specify complete circles
@@ -2438,7 +2438,7 @@
  */
 #if HAS_TRINAMIC_CONFIG
 
-#define HOLD_MULTIPLIER 0.5 // Scales down the holding current from run current
+#define HOLD_MULTIPLIER 0.8 // Scales down the holding current from run current
 
 /**
    * Interpolate microsteps to 256
@@ -2447,8 +2447,8 @@
 #define INTERPOLATE true
 
 #if AXIS_IS_TMC(X)
-#define X_CURRENT 800            // (mA) RMS current. Multiply by 1.414 for peak current.
-#define X_CURRENT_HOME 300 // (mA) RMS current for sensorless homing
+#define X_CURRENT 1200            // (mA) RMS current. Multiply by 1.414 for peak current.
+#define X_CURRENT_HOME 350 // (mA) RMS current for sensorless homing
 #define X_MICROSTEPS 16          // 0..256
 #define X_RSENSE 0.11
 #define X_CHAIN_POS -1 // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
@@ -2456,7 +2456,7 @@
 #endif
 
 #if AXIS_IS_TMC(X2)
-#define X2_CURRENT 800
+#define X2_CURRENT 1200
 #define X2_CURRENT_HOME X_CURRENT_HOME
 #define X2_MICROSTEPS X_MICROSTEPS
 #define X2_RSENSE 0.11
@@ -2465,8 +2465,8 @@
 #endif
 
 #if AXIS_IS_TMC(Y)
-#define Y_CURRENT 800
-#define Y_CURRENT_HOME 200
+#define Y_CURRENT 1200
+#define Y_CURRENT_HOME 250
 #define Y_MICROSTEPS 16
 #define Y_RSENSE 0.11
 #define Y_CHAIN_POS -1
@@ -2474,7 +2474,7 @@
 #endif
 
 #if AXIS_IS_TMC(Y2)
-#define Y2_CURRENT 800
+#define Y2_CURRENT 1200
 #define Y2_CURRENT_HOME Y_CURRENT_HOME
 #define Y2_MICROSTEPS Y_MICROSTEPS
 #define Y2_RSENSE 0.11
@@ -2673,7 +2673,7 @@
    * Define your own with:
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-#define CHOPPER_TIMING CHOPPER_DEFAULT_12V // All axes (override below)
+#define CHOPPER_TIMING CHOPPER_DEFAULT_24V // All axes (override below)
 //#define CHOPPER_TIMING_X  CHOPPER_DEFAULT_12V   // For X Axes (override below)
 //#define CHOPPER_TIMING_X2 CHOPPER_DEFAULT_12V
 //#define CHOPPER_TIMING_Y  CHOPPER_DEFAULT_12V   // For Y Axes (override below)
@@ -2765,9 +2765,9 @@
 
 #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
 // TMC2209: 0...255. TMC2130: -64...63
-#define X_STALL_SENSITIVITY 8
+#define X_STALL_SENSITIVITY 6
 #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-#define Y_STALL_SENSITIVITY 16
+#define Y_STALL_SENSITIVITY 12
 #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
 //#define Z_STALL_SENSITIVITY  8
 //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY
